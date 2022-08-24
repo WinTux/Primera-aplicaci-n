@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pais;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -45,9 +46,29 @@ namespace Pais
     }
 }
 
+namespace Universidad
+{
+    public class Estudiante : Persona
+    {
+        public int matricula { get; set; }
+        public string correoInstitutcional { get; set; }
+
+        public Estudiante()
+        {
+            matricula = 0;
+        }
+
+        public Estudiante(int edadz, string nombrez, string apellidoz, int matricula, string correoInstitutcional) : base(edadz, nombrez, apellidoz)
+        {
+            this.matricula = matricula;
+            this.correoInstitutcional = correoInstitutcional;
+        }
+    }
+}
+
 namespace mascotas {
     using Pais;
-    public class Perro : Animal { 
+    public partial class Perro : Animal { 
         public string nombre { get; set; }
         public string nombreDueño { get; set; }
 

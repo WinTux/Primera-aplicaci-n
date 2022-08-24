@@ -1,5 +1,6 @@
 ﻿using mascotas;
 using Pais;
+using EstudianteUniv = Universidad.Estudiante;
 using System;
 
 namespace ejemplos
@@ -8,6 +9,7 @@ namespace ejemplos
     {
         static void Main(string[] args)
         {
+            #region Ejemplos iniciales
             Console.WriteLine("Hello World!");
             int a = 4;
             string texto = "Pepe";
@@ -18,6 +20,7 @@ namespace ejemplos
             Console.WriteLine(b);
             float otroNum = b;
             Saludo();
+            #endregion
             Persona per = new Persona();
             per.edad = 20;
             per.nombre = "Pepe";
@@ -31,6 +34,7 @@ namespace ejemplos
             Perro snoopy = new Perro();
             snoopy.patas = 4;
             snoopy.nombre = "Batuque";
+            snoopy.Ladrar();
             mascotas.pequeños.Loro lorito = new mascotas.pequeños.Loro();
             
             Console.WriteLine(per.edad + "; " + per.nombre);
@@ -51,6 +55,38 @@ namespace ejemplos
 
             Estudiante est2aux = (Estudiante)ppp;
             Console.WriteLine(est2aux.matricula + "-" + est2aux.nombre);
+
+            #region Eejemplo de tipado débil
+            //Tipado debil
+            string txt = "texto";
+            var txt2 = "otro texto";
+            var es = est2aux;
+            #endregion
+
+            EstudianteUniv estU = new EstudianteUniv(23,"Pepe","Perales",123456,"pepep@universidad.wow.bo");
+            Gato g = new Gato();
+
+
+
+            Console.WriteLine("Por favor, introduzca un número:");
+            try
+            {
+                int nn = int.Parse(Console.ReadLine());
+                Console.WriteLine(10 / nn);
+            }
+            
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine("Por favor, no ponga el número 0");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Por favor escriba un número!");
+            }
+            
+
+
+
 
             Console.ReadKey();
         }
