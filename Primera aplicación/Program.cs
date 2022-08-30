@@ -2,6 +2,7 @@
 using Pais;
 using EstudianteUniv = Universidad.Estudiante;
 using System;
+using Primera_aplicación;
 
 namespace ejemplos
 {
@@ -83,10 +84,11 @@ namespace ejemplos
             {
                 Console.WriteLine("Por favor escriba un número!");
             }
-            
 
 
-
+            //Estructuras de datos
+            //Estructuras.Ejemplo2();
+            Estructuras.Ejemplo3();
 
             Console.ReadKey();
         }
