@@ -100,5 +100,23 @@ namespace Primera_aplicación
             aux.Pop();
             Console.WriteLine(mi_pila.Peek());//Ana
         }
+        public static void Ejemplo4() {//Colas (FIFO - First In, First Out)
+            Queue<Persona> colaAlBanco = new Queue<Persona>();
+            colaAlBanco.Enqueue(new Persona(20,"Pepe"));
+            colaAlBanco.Enqueue(new Persona(30, "Ana"));
+            colaAlBanco.Enqueue(new Persona(19, "Raul"));
+            colaAlBanco.Enqueue(new Persona(24, "Sofia"));
+            Persona p_elim = colaAlBanco.Dequeue();
+            colaAlBanco.Enqueue(p_elim); //volvió!
+            Console.WriteLine("Se eliminó a " + p_elim.nombre);
+            if (colaAlBanco.Contains(p_elim))
+                Console.WriteLine("Pepe esta en la cola");
+            else
+                Console.WriteLine("Pepe NO esta en la cola");
+        }
+        public static void Ejemplo5()
+        {//Map: cuenta con una tupla -> llave & valor
+            //Para averiguar
+        }
     }
 }

@@ -88,8 +88,8 @@ namespace ejemplos
 
             //Estructuras de datos
             //Estructuras.Ejemplo2();
-            Estructuras.Ejemplo3();
-
+            //Estructuras.Ejemplo3();
+            Estructuras.Ejemplo4();
             Console.ReadKey();
         }
 
