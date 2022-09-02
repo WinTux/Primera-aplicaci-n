@@ -117,6 +117,48 @@ namespace Primera_aplicación
         public static void Ejemplo5()
         {//Map: cuenta con una tupla -> llave & valor
             //Para averiguar
+
+            string exp = "( 2 + 3 ) * 6"; //postfix: 2 3 + 6 *
+            string[] tokens = exp.Split(' ');
+            foreach (string simbolo in tokens)
+                Console.WriteLine("Este es un token: " + simbolo);
+            Stack<string> pila = new Stack<string>();
+            string mano = "";
+            while(pila.Count > 0)
+            {
+                switch (mano)
+                {
+                    case "(":
+                        pila.Push(mano);
+                        break;
+                    case ")":
+                        break;
+                    case "+": case "-": case "*": case "/":
+                        break;
+                    default://es numero
+
+                        break;
+                }
+            }
+
+            /*
+             Sin embargo, vemos que las computadoras evalúan expresiones infix… esto lo hacen mediante una conversión a postfix
+            Existe un algoritmo para dicha conversión:
+                1. Meter paréntesis de apertura en la pila
+                2. Concatenar paréntesis de cierre al final de la expresión infix
+                3. Mientras la pila no esté vacía rescatar valores de la expresión infix de izq a Der
+	Si el char es dígito: concatenamos a expresión final postfix
+	Si el char es paréntesis de apertura: push a pila
+	Si el char es operador: Sacamos los operadores (si existen en la cima) solo si son de igual o mayor precedencia que el operador actual y concatenar a la expresión final postfix. Meter el operador actual a la pila.
+	Si el char es paréntesis de cierre: Sacar los valores de la pila e ir concatenándolos a la expresión final postfix, hasta que haya un paréntesis de apertura en la cima de la pila. Sacar y eliminar dicho paréntesis de apertura de la pila.
+
+             */
+            /*Ejemplo: ( 2 + 3 ) * 6
+             * INFIX  
+             * PILA:
+             * POSTFIX:  2 3 + 6 *
+             * MANO:
+             */
         }
     }
 }
