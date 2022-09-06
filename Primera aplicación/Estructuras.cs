@@ -114,33 +114,65 @@ namespace Primera_aplicación
             else
                 Console.WriteLine("Pepe NO esta en la cola");
         }
-        public static void Ejemplo5()
-        {//Map: cuenta con una tupla -> llave & valor
-            //Para averiguar
-
+        public static string Ejemplo5()//convierte de infix a postfix
+        {
             string exp = "( 2 + 3 ) * 6"; //postfix: 2 3 + 6 *
-            string[] tokens = exp.Split(' ');
-            foreach (string simbolo in tokens)
-                Console.WriteLine("Este es un token: " + simbolo);
+            exp += " )";// ( 2 + 3 ) * 6 )
             Stack<string> pila = new Stack<string>();
+            pila.Push("(");
+
+            string[] tokens = exp.Split(' ');
+            int indice = 0;
+            
             string mano = "";
+            string postfix = "";
             while(pila.Count > 0)
             {
+                mano = tokens[indice++];
                 switch (mano)
                 {
                     case "(":
                         pila.Push(mano);
                         break;
                     case ")":
+                        //ver si en la cima de la pila hay un "("
+                        while (!pila.Peek().Equals("(")) {
+                            //Si no hay "(", entonces sacar elemento y concatenar a postfix
+                            postfix += " " + pila.Pop();
+                        }
+                        //sino, sacar y eliminar
+                        if(pila.Peek().Equals("("))
+                            pila.Pop();
                         break;
                     case "+": case "-": case "*": case "/":
+                    case "^": case "%":
+                        //Tengo un operador en mi mano
+                        //¿Hay un operador en la cima de la pila?
+                        while (esOperador(pila.Peek())) {
+                            //¿El operador de la pila es mayor al de la mano?
+                            if (esOperadorMayor(pila.Peek(), mano))
+                            {
+                                //Sacamos de la pila y lo concatenamos en postfix
+                                string aux = pila.Pop();
+                                postfix += " " + aux;
+                            }
+                            else
+                                break;
+
+                        }
+
+
+                        //agregar operador de la mano a la pila
+                        pila.Push(mano);
+
                         break;
                     default://es numero
-
+                        postfix += " " + mano;
                         break;
                 }
             }
 
+            return postfix;
             /*
              Sin embargo, vemos que las computadoras evalúan expresiones infix… esto lo hacen mediante una conversión a postfix
             Existe un algoritmo para dicha conversión:
@@ -159,6 +191,92 @@ namespace Primera_aplicación
              * POSTFIX:  2 3 + 6 *
              * MANO:
              */
+        }
+
+        private static bool esOperadorMayor(string op1, string op2)
+        {
+            /*
+             
+             ^
+             / * %
+             + -
+
+
+             */
+
+            //enum 
+            
+            //con arrays
+
+
+            if (op1.Equals("+") || op1.Equals("-"))
+                return false;
+            if (!((op1.Equals("/") || op1.Equals("*") || op1.Equals("%")) && (op2.Equals("+") || op2.Equals("-"))))
+                return false;
+            if (op1.Equals("^") && op2.Equals("^"))
+                return false;
+            return true;
+
+        }
+
+        private static bool esOperador(string caracter)
+        {
+            string operadores = "+-*/%^";
+            return operadores.Contains(caracter);//o invertido
+
+            //if(caracter.Equals("+")||caracter.Equals("-")||caracter.Equals("*")||...)
+
+            /*switch (caracter) {
+                case "+": case "-":
+                    return true;
+                default:
+                    return false;
+            }*/
+        }
+
+
+        public static int Ejemplo6(string expPostfix) {
+            int resultado = 0;
+            Stack<int> pila = new Stack<int>();
+            string[] simbolos = expPostfix.Trim().Split(" ");// "4,5"
+            foreach (string simbolo in simbolos) {
+                switch (simbolo) {
+                    case "+":
+                    case "-":
+                    case "*":
+                    case "/":
+                    case "^":
+                    case "%":
+                        // 5 9 * 6 +
+                        break;
+                    default:
+                        //Push a la pila
+                        break;
+                }
+            }
+            /*
+            Recorremos de izq a der
+
+            
+
+            Ponemos valor acutal en la mano
+            Si en mano es un numero: Push a pila
+            Si es un operador: Pop en variable B, Pop en variable A y A operacion B en variable C, Push C a la pila
+
+            Hasta que en la pila haya un solo elemento (numero)
+             */
+
+            /*Ejemplo: 2 3 + 6 *
+             * POSTFIX:
+             * PILA:  30
+             * RESULTADO:  
+             * MANO:  *
+             * A: 5
+             * B: 6
+             * C:
+             */
+            return resultado;
+
         }
     }
 }

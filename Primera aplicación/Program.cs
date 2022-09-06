@@ -90,7 +90,7 @@ namespace ejemplos
             //Estructuras.Ejemplo2();
             //Estructuras.Ejemplo3();
             //Estructuras.Ejemplo4();
-            Estructuras.Ejemplo5();
+            Console.WriteLine(Estructuras.Ejemplo5());
             Console.ReadKey();
         }
 
